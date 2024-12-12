@@ -1,16 +1,23 @@
 # To do
 
 - [ ] API
-  - [ ] Models
-  - [ ] Views
-  - [ ] User authentication
-  - [ ] Throttling & Pagination
-  - [ ] User management and grouping
+  - [ ] core
+    - [ ] User
+  - [ ] Task
+    - [ ] Models
+    - [ ] Views
+    - [ ] User authentication
+    - [ ] Throttling & Pagination
+    - [ ] User management and grouping
 - [ ] Website
   - [ ] Login page
-  - [ ] Task view and management
+  - [ ] Task
+    - [ ] Task view and management
   - [ ] Caching
 - [ ] Telegram bot
+  - [ ] Task
+    - [ ] View
+    - [ ] Notification
 - [ ] Deployement
   - [ ] Python script
   - [ ] Github actions
