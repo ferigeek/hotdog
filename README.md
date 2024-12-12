@@ -1,8 +1,8 @@
 # To do
 
 - [ ] API
-  - [ ] core
-    - [ ] User
+  - [X] core
+    - [X] User
   - [ ] Task
     - [ ] Models
     - [ ] Views
