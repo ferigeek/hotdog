@@ -4,7 +4,7 @@
   - [X] core
     - [X] User
   - [ ] Task
-    - [ ] Models
+    - [X] Models
     - [ ] Views
     - [ ] User authentication
     - [ ] Throttling & Pagination
