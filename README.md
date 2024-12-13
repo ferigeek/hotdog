@@ -5,6 +5,7 @@
     - [X] User
   - [ ] Task
     - [X] Models
+    - [ ] Serializers
     - [ ] Views
     - [ ] User authentication
     - [ ] Throttling & Pagination
