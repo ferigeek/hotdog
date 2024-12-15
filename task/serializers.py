@@ -10,4 +10,5 @@ class TasksSerializer(ModelSerializer):
     
 class TaskSerializer(ModelSerializer):
     class Meta:
-        
+        model = models.Task
+        fields = '__all__'
