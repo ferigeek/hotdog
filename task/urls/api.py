@@ -4,5 +4,5 @@ from task.views import api
 
 urlpatterns = [
     path('tasks', api.TasksView.as_view(), name='list_create_task'),
-    # path('tasks/<int:id>')
+    path('tasks/<int:id>', api.TaskView.as_view(), name='retrieve_update_destroy_task'),
 ]
