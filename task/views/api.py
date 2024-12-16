@@ -1,8 +1,8 @@
-from datetime import datetime
 import json
+from datetime import datetime
 from rest_framework.response import Response
 from rest_framework import status
-from rest_framework.generics import ListCreateAPIView, RetrieveUpdateDestroyAPIView
+from rest_framework.generics import ListCreateAPIView, RetrieveUpdateDestroyAPIView, ListAPIView
 from rest_framework.permissions import IsAuthenticated
 from task import serializers, models, permissions
 
@@ -91,3 +91,12 @@ class TaskView(RetrieveUpdateDestroyAPIView):
             )
 
         return super().patch(request, *args, **kwargs)
+    
+
+class TaskHistoryView(ListAPIView):
+    serializer_class = serializers.TaskHistorySerializer
+    permission_classes = [permissions.TaskPermission]
+    queryset = models.TaskHistory.objects.all()
+
+    def get_queryset(self):
+        return models.TaskHistory.objects.filter(task=self.kwargs['id'])

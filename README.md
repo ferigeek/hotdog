@@ -3,13 +3,13 @@
 - [ ] API
   - [X] core
     - [X] User
+    - [ ] User management and grouping
   - [ ] Task
     - [X] Models
-    - [ ] Serializers
-    - [ ] Views
-    - [ ] User authentication
+    - [X] Serializers
+    - [X] Views
+    - [X] User authentication
     - [ ] Throttling & Pagination
-    - [ ] User management and grouping
 - [ ] Website
   - [ ] Login page
   - [ ] Task
