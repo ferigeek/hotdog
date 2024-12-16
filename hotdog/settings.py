@@ -44,6 +44,8 @@ INSTALLED_APPS = [
     'rest_framework.authtoken',
     'core',
     'task',
+    'djoser',
+    'drf_spectacular',
 ]
 
 MIDDLEWARE = [
@@ -161,4 +163,35 @@ REST_FRAMEWORK = {
         'rest_framework.parsers.MultiPartParser',
         'rest_framework.parsers.FileUploadParser',
     ],
+    'DEFAULT_SCHEMA_CLASS': 'drf_spectacular.openapi.AutoSchema',
 }
+
+
+DJOSER = {
+    'USER_CREATE_PASSWORD_RETYPE': True,
+    'USER_REGISTRATION_VERIFICATION': False,
+    'SEND_ACTIVATION_EMAIL': False,
+    'LOGIN_FIELD': 'email',
+    'SERIALIZERS': {
+        'user_create': 'core.serializers.UserSerializer'
+    },
+    'PERMISSIONS': {
+        'user_list': ['rest_framework.permissions.IsAdminUser']
+    },
+}
+
+
+SPECTACULAR_SETTINGS = {
+    'TITLE': 'Sage Dagh API DOC',
+    'DESCRIPTION': 'مشتی هستی و پر طرفدار',
+    'VERSION': '1.0.0',
+    'SERVE_INCLUDE_SCHEMA': True,
+}
+
+
+CSRF_COOKIE_SECURE = os.getenv('CSRF_COOKIE_SECURE', 'False') == 'True'
+SESSION_COOKIE_SECURE = os.getenv('SESSION_COOKIE_SECURE', 'False') == 'True'
+SECURE_SSL_REDIRECT = os.getenv('SECURE_SSL_REDIRECT', 'False') == 'True'
+SECURE_HSTS_SECONDS = int(os.getenv('SECURE_HSTS_SECONDS', 0))
+SECURE_HSTS_INCLUDE_SUBDOMAINS = os.getenv('SECURE_HSTS_INCLUDE_SUBDOMAINS', 'False') == 'True'
+SECURE_HSTS_PRELOAD = os.getenv('SECURE_HSTS_PRELOAD', 'False') == 'True'

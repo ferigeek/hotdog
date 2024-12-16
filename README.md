@@ -3,8 +3,8 @@
 - [ ] API
   - [X] core
     - [X] User
-    - [ ] User management and grouping
-  - [ ] Task
+    - [X] User management and grouping
+  - [X] Task
     - [X] Models
     - [X] Serializers
     - [X] Views
@@ -28,6 +28,12 @@
 - `SECRET_KEY`
 - `DEBUG` ('True' or 'False', Default: True)
 - `ALLOWED_HOSTS` (Separated by comma)
+- `CSRF_COOKIE_SECURE` (Default: False)
+- `SESSION_COOKIE_SECURE` (Default: False)
+- `SECURE_SSL_REDIRECT` (Default: False)
+- `SECURE_HSTS_SECONDS` (Default: 0)
+- `SECURE_HSTS_INCLUDE_SUBDOMAINS` (Default: False)
+- `SECURE_HSTS_PRELOAD` (Default: False)
 ### Database variables
   - `DB_ENGINE`
   - `DB_NAME`
@@ -35,4 +41,4 @@
   - `DB_PORT`
   - `DB_USER`
   - `DB_PASS`
-  - If not provided, sqlite will be used.
+  - If not provided, **sqlite** will be used.

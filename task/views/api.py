@@ -15,6 +15,9 @@ class TasksView(ListCreateAPIView):
         user = self.request.user
         return models.Task.objects.filter(related_to__in=user.groups.all()).distinct()
     
+    def perform_create(self, serializer):
+        serializer.save(created_by=self.request.user)
+    
 
 class TaskView(RetrieveUpdateDestroyAPIView):
     permission_classes = [permissions.TaskPermission]
