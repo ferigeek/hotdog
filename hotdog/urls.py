@@ -16,9 +16,11 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+from core import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/todo/', include('task.urls.api')),
-    path('api/groups', include('core.urls')),
+    path('api/groups', views.GroupView.as_view(), name='list_create_group'),
+    #path('', views.login_view)
 ]

@@ -9,7 +9,7 @@
     - [X] Serializers
     - [X] Views
     - [X] User authentication
-    - [ ] Throttling & Pagination
+    - [X] Throttling & Pagination
 - [ ] Website
   - [ ] Login page
   - [ ] Task
