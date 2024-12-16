@@ -12,6 +12,9 @@ class Task(models.Model):
     notify_at = models.DateTimeField()
     related_to = models.ManyToManyField(Group, related_name='related_tasks')
 
+    def __str__(self):
+        return self.title
+
 
 class TaskHistory(models.Model):
     task = models.ForeignKey(Task, on_delete=models.CASCADE)
@@ -22,4 +25,7 @@ class TaskHistory(models.Model):
     prev_deadline = models.DateTimeField(blank=True, null=True)
     prev_notify = models.DateTimeField(blank=True, null=True)
     prev_groups = models.JSONField(blank=True, null=True)
+
+    def __str__(self):
+        return self.task
 

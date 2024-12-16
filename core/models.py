@@ -1,6 +1,6 @@
 from datetime import datetime
 from django.db import models
-from django.contrib.auth.models import AbstractBaseUser, BaseUserManager, PermissionsMixin
+from django.contrib.auth.models import AbstractBaseUser, BaseUserManager, PermissionsMixin, Group
 from django.core.exceptions import ValidationError
 from convertdate.persian import from_gregorian
 
@@ -65,4 +65,10 @@ class User(AbstractBaseUser, PermissionsMixin):
                 raise ValidationError('Invalid year of entry: too old!')
             if self.year_of_entry > datetime(y, m, d).date():
                 raise ValidationError('Invalid year of entry: You entered in the future!')
+
+
+class GroupMeta(models.Model):
+    group = models.ForeignKey(Group, on_delete=models.CASCADE)
+    created_at = models.DateTimeField(auto_now_add=True)
+    create_by = models.ForeignKey(User, on_delete=models.CASCADE)
 
