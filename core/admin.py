@@ -1,25 +1,28 @@
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
+from django.utils.translation import gettext_lazy
 from . import models
 
 
 class Admin(UserAdmin):
-    model = models.User
-    list_display = ('email', 'first_name', 'last_name', 'year_of_entry', 'field_of_study', 'is_staff')
-    list_filter = ('is_staff', 'is_active', 'field_of_study')
+    ordering = ['email']
+    list_display = ['email', 'first_name', 'last_name', 'year_of_entry', 'field_of_study']
+    list_filter = ['is_staff', 'is_superuser', 'field_of_study']
+    search_fields = ['email', 'first_name', 'last_name']
+
     fieldsets = (
         (None, {'fields': ('email', 'password')}),
-        ('Personal Info', {'fields': ('first_name', 'last_name', 'year_of_entry', 'field_of_study')}),
-        ('Permissions', {'fields': ('is_active', 'is_staff', 'is_superuser', 'groups', 'user_permissions')}),
+        (gettext_lazy('Personal Info'), {'fields': ('first_name', 'last_name', 'year_of_entry', 'field_of_study')}),
+        (gettext_lazy('Permissions'), {'fields': ('is_active', 'is_staff', 'is_superuser', 'groups', 'user_permissions')}),
+        (gettext_lazy('Important Dates'), {'fields': ('last_login',)}),
     )
+
     add_fieldsets = (
         (None, {
             'classes': ('wide',),
-            'fields': ('email', 'first_name', 'last_name', 'year_of_entry', 'field_of_study', 'password1', 'password2'),
+            'fields': ('email', 'first_name', 'last_name', 'password1', 'password2'),
         }),
     )
-    search_fields = ('email',)
-    ordering = ('email',)
 
 
 admin.site.register(models.User, Admin)

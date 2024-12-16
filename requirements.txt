@@ -1,5 +1,7 @@
 asgiref==3.8.1
+convertdate==2.4.0
 Django==5.1.4
 djangorestframework==3.15.2
+PyMeeus==0.5.12
 sqlparse==0.5.3
 tzdata==2024.2
