@@ -23,3 +23,16 @@
   - [ ] Python script
   - [ ] Github actions
 
+# Environment variables
+
+- `SECRET_KEY`
+- `DEBUG` ('True' or 'False', Default: True)
+- `ALLOWED_HOSTS` (Separated by comma)
+### Database variables
+  - `DB_ENGINE`
+  - `DB_NAME`
+  - `DB_HOST`
+  - `DB_PORT`
+  - `DB_USER`
+  - `DB_PASS`
+  - If not provided, sqlite will be used.
