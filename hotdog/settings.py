@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'rest_framework.authtoken',
     'core',
     'task',
+    'telegram_bot',
     'djoser',
     'drf_spectacular',
 ]

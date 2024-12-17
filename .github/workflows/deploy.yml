@@ -8,6 +8,7 @@ on:
 jobs:
   deploy:
     runs-on: ubuntu-latest
+    environment: production 
 
     steps:
       - name: Checkout Code
@@ -29,7 +30,7 @@ jobs:
 
       - name: Run Deployment Script
         uses: appleboy/ssh-action@v1.0.0
-        env:  # Pass environment variables to Python
+        env:
           VENV_NAME: ${{ secrets.VENV_NAME }}
           GUNICORN_SERVICE: ${{ secrets.GUNICORN_SERVICE }}
         with:
