@@ -1,0 +1,40 @@
+name: Create Release on Tag
+
+on:
+  push:
+    tags:
+      - 'v*'
+
+jobs:
+  create-release:
+    name: Create GitHub Release
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Create GitHub Release
+        id: create_release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: ${{ github.ref }}  # Use the pushed tag
+          release_name: Release ${{ github.ref_name }}
+          body: |
+            ## What's New
+            - Automatically generated release for tag ${{ github.ref_name }}.
+            - Add notes about changes, features, or bug fixes here.
+          draft: false
+          prerelease: true
+
+      - name: Upload Release Artifact
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: ./your_build_file.zip
+          asset_name: your_build_file.zip
+          asset_content_type: application/zip
