@@ -6,13 +6,13 @@ from . import models
 
 class Admin(UserAdmin):
     ordering = ['email']
-    list_display = ['email', 'first_name', 'last_name', 'year_of_entry', 'field_of_study']
+    list_display = ['email', 'first_name', 'last_name', 'year_of_entry', 'field_of_study', 'tel_user_id']
     list_filter = ['is_staff', 'is_superuser', 'field_of_study']
     search_fields = ['email', 'first_name', 'last_name']
 
     fieldsets = (
         (None, {'fields': ('email', 'password')}),
-        (gettext_lazy('Personal Info'), {'fields': ('first_name', 'last_name', 'year_of_entry', 'field_of_study')}),
+        (gettext_lazy('Personal Info'), {'fields': ('first_name', 'last_name', 'year_of_entry', 'field_of_study', 'tel_user_id')}),
         (gettext_lazy('Permissions'), {'fields': ('is_active', 'is_staff', 'is_superuser', 'groups', 'user_permissions')}),
         (gettext_lazy('Important Dates'), {'fields': ('last_login',)}),
     )

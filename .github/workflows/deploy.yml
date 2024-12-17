@@ -1,0 +1,42 @@
+name: Project Deployment
+
+on:
+  push:
+    tags:
+      - 'v*'
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Install Dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Deploy to Server
+        uses: appleboy/scp-action@v0.1.4
+        with:
+          host: ${{ secrets.SERVER_HOST }}
+          username: ${{ secrets.SERVER_USER }}
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          source: "."
+          target: ${{ secrets.PROJ_DIR }}
+
+      - name: Run Deployment Script
+        uses: appleboy/ssh-action@v1.0.0
+        env:  # Pass environment variables to Python
+          VENV_NAME: ${{ secrets.VENV_NAME }}
+          GUNICORN_SERVICE: ${{ secrets.GUNICORN_SERVICE }}
+        with:
+          host: ${{ secrets.SERVER_HOST }}
+          username: ${{ secrets.SERVER_USER }}
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          script: |
+            cd ${{ secrets.PROJ_DIR }}
+            source ${{ secrets.VENV_NAME }}/bin/activate
+            python deploy.py

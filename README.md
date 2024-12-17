@@ -1,6 +1,6 @@
 # To do
 
-- [ ] API
+- [X] API
   - [X] core
     - [X] User
     - [X] User management and grouping

@@ -42,6 +42,7 @@ class User(AbstractBaseUser, PermissionsMixin):
     field_of_study = models.ForeignKey(FieldOfStudy, on_delete=models.CASCADE, null=True, blank=True)
     first_name = models.CharField(max_length=100)
     last_name = models.CharField(max_length=100)
+    tel_user_id = models.IntegerField(null=True, blank=True)
 
     is_staff = models.BooleanField(default=False)
     is_active = models.BooleanField(default=True)
