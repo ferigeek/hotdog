@@ -3,7 +3,7 @@
 
 # To Do
  1. [X] Project setup
- 2. [ ] Models and Database
+ 2. [X] Models and Database
  3. [ ] Serializers
  4. [ ] API Endpoints (Views)
  5. [ ] URL Routing
