@@ -1,3 +1,4 @@
+from datetime import datetime
 from django.db import models
 from core.models import HotdogUser, Course
 
@@ -11,6 +12,12 @@ class Task(models.Model):
     completed = models.BooleanField(default=False)
     course = models.ForeignKey(Course, on_delete=models.CASCADE, blank=True, null=True)
     created_by = models.ForeignKey(HotdogUser, on_delete=models.CASCADE, related_name='tasks')
+
+    def clean(self):
+        if self.deadline < datetime.now():
+            raise ValueError("Deadline cannot be in the past.")
+        if self.notify_at < datetime.now():
+            raise ValueError("Notification time cannot be in the past.")
 
     def __str__(self):
         return f"{self.title} - {self.deadline}"
