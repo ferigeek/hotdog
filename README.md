@@ -5,13 +5,14 @@
  1. [X] Project setup
  2. [X] Models and Database
  3. [X] Serializers
- 4. [ ] API Endpoints (Views)
- 5. [ ] URL Routing
- 6. [ ] Authentication and Authorization
- 7. [ ] Deployment (Github Actions)
- 8. [ ] Throttling
- 9. [ ] Monitoring
-10. [ ] Login Page
-11. [ ] Donate page
-12. [ ] Pagination
-13. ...
+ 4. [ ] Filtering
+ 5. [ ] API Endpoints (Views)
+ 6. [ ] URL Routing
+ 7. [ ] Authentication and Authorization
+ 8. [ ] Deployment (Github Actions)
+ 9. [ ] Throttling
+10. [ ] Monitoring
+11. [ ] Login Page
+12. [ ] Donate page
+13. [ ] Pagination
+14. ...

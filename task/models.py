@@ -12,6 +12,7 @@ class Task(models.Model):
     completed = models.BooleanField(default=False)
     course = models.ForeignKey(Course, on_delete=models.CASCADE, blank=True, null=True)
     created_by = models.ForeignKey(HotdogUser, on_delete=models.CASCADE, related_name='tasks')
+    is_finished = models.BooleanField(default=False, blank=True)
 
     def clean(self):
         if self.deadline < datetime.now():
@@ -33,3 +34,4 @@ class TaskHistory(models.Model):
     pre_deadline = models.DateTimeField(auto_now_add=True, blank=True)
     pre_notify_at = models.DateTimeField(auto_now_add=True, blank=True)
     pre_completed = models.BooleanField(default=False, blank=True)
+    got_deleted = models.BooleanField(default=False, blank=True)
