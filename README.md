@@ -4,7 +4,7 @@
 # To Do
  1. [X] Project setup
  2. [X] Models and Database
- 3. [ ] Serializers
+ 3. [X] Serializers
  4. [ ] API Endpoints (Views)
  5. [ ] URL Routing
  6. [ ] Authentication and Authorization
