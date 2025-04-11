@@ -19,10 +19,10 @@ class TaskView(APIView):
         Retrieve a task by its ID.
         """
         try:
-            task = TaskHistory.objects.get(id=task_id)
+            task = Task.objects.get(id=task_id)
             serializer = TaskSerializer(task)
             return Response(serializer.data)
-        except TaskHistory.DoesNotExist:
+        except Task.DoesNotExist:
             return Response(status=404)
 
     def put(self, request, task_id):
@@ -43,7 +43,7 @@ class TaskView(APIView):
                     pre_created_at=task.created_at,
                     pre_deadline=task.deadline,
                     pre_notify_at=task.notify_at,
-                    pre_completed=task.completed
+                    pre_completed=task.is_finished
                 )
                 serializer.save()
                 return Response(serializer.data)
@@ -64,12 +64,12 @@ class TaskView(APIView):
                     task=task,
                     modified_at=timezone.now(),
                     moddified_by=request.user,
-                    pre_title=task.title if 'title' in request.data else '',
-                    pre_description=task.description if 'description' in request.data else '',
-                    pre_created_at=task.created_at if 'created_at' in request.data else None,
-                    pre_deadline=task.deadline if 'deadline' in request.data else None,
-                    pre_notify_at=task.notify_at if 'notify_at' in request.data else None,
-                    pre_completed=task.completed if 'completed' in request.data else None
+                    pre_title=task.title,
+                    pre_description=task.description,
+                    pre_created_at=task.created_at,
+                    pre_deadline=task.deadline,
+                    pre_notify_at=task.notify_at,
+                    pre_completed=task.is_finished
                 )
                 serializer.save()
                 return Response(serializer.data)
@@ -93,7 +93,7 @@ class TaskView(APIView):
                     pre_created_at=task.created_at,
                     pre_deadline=task.deadline,
                     pre_notify_at=task.notify_at,
-                    pre_completed=task.completed,
+                    pre_completed=task.is_finished,
                     got_deleted=True
                 )
             task.delete()
