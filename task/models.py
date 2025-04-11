@@ -11,6 +11,12 @@ class Task(models.Model):
     notify_at = models.DateTimeField()
     completed = models.BooleanField(default=False)
     course = models.ForeignKey(Course, on_delete=models.CASCADE, blank=True, null=True)
+    fields_of_study = models.ManyToManyField(
+        'core.FieldOfStudy',
+        blank=True,
+        null=True,
+        related_name='tasks'
+    )
     created_by = models.ForeignKey(HotdogUser, on_delete=models.CASCADE, related_name='tasks')
     is_finished = models.BooleanField(default=False, blank=True)
 
@@ -19,6 +25,8 @@ class Task(models.Model):
             raise ValueError("Deadline cannot be in the past.")
         if self.notify_at < datetime.now():
             raise ValueError("Notification time cannot be in the past.")
+        if self.fields_of_study == None and self.course == None:
+            raise ValueError("Either fields_of_study or course must be provided.")
 
     def __str__(self):
         return f"{self.title} - {self.deadline}"
