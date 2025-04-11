@@ -1,5 +1,5 @@
-from datetime import datetime
 from django.db import models
+from django.utils import timezone
 from django.contrib.auth.models import AbstractUser
 
 
@@ -18,9 +18,9 @@ class HotdogUser(AbstractUser):
     last_name = models.CharField(max_length=30, blank=True, null=True)
     field_of_study = models.ForeignKey(
         FieldOfStudy, 
-        on_delete=models.CASCADE, 
+        on_delete=models.CASCADE,
+        null=True,
         blank=True, 
-        null=True, 
         related_name='students'
     )
 
@@ -36,9 +36,9 @@ class Course(models.Model):
     course_name = models.CharField(max_length=255, blank=True, null=True)
     instructor = models.CharField(max_length=255, blank=True, null=True)
     field_of_study = models.ManyToManyField(
-        FieldOfStudy, 
+        FieldOfStudy,
+        null=True,
         blank=True, 
-        null=True, 
         related_name='courses'
     )
     semester = models.IntegerField(blank=True, null=True)
@@ -47,8 +47,8 @@ class Course(models.Model):
     def clean(self):
         if self.semester < 1 or self.semester > 2:
             raise ValueError("Semester must be either 1 or 2.")
-        if self.year < (datetime.now().year - 1) or self.year > (datetime.now().year + 1):
+        if self.year < (timezone.now().year - 1) or self.year > (timezone.now().year + 1):
             raise ValueError("Invalid year.")
 
     def __str__(self):
-        return f"{self.course_name} - {self.semester} {self.year}"
+        return f"{self.course_name} - {self.year} Sem: {self.semester}"
