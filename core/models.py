@@ -16,6 +16,7 @@ class HotdogUser(AbstractUser):
     email = models.EmailField(unique=True, blank=True, null=True)
     first_name = models.CharField(max_length=30, blank=True, null=True)
     last_name = models.CharField(max_length=30, blank=True, null=True)
+    telegram_user_id = models.BigIntegerField(unique=True, blank=True, null=True)
     field_of_study = models.ForeignKey(
         FieldOfStudy, 
         on_delete=models.CASCADE,
