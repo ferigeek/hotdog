@@ -7,6 +7,11 @@ class TaskSerializer(serializers.ModelSerializer):
         model = Task
         fields = '__all__'
     
+    def validate(self, attrs):
+        if not attrs['fields_of_study'] and not attrs['course']:
+            raise serializers.ValidationError("Either field_of_study or course must be provided.")
+        return attrs
+    
 
 class TaskHistorySerializer(serializers.ModelSerializer):
     class Meta:

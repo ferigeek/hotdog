@@ -1,6 +1,6 @@
 from datetime import datetime
 from rest_framework import serializers
-from .models import Course
+from .models import Course, FieldOfStudy
 
 
 class CourseSerializer(serializers.ModelSerializer):
@@ -14,3 +14,9 @@ class CourseSerializer(serializers.ModelSerializer):
         if data['year'] < (datetime.now().year - 1) or data['year'] > (datetime.now().year + 1):
             raise serializers.ValidationError("Invalid year.")
         return data
+    
+
+class FieldOfStudySerializer(serializers.ModelSerializer):
+    class Meta:
+        model = FieldOfStudy
+        fields = '__all__'

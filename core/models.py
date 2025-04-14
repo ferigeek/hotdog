@@ -42,6 +42,12 @@ class Course(models.Model):
         blank=True, 
         related_name='courses'
     )
+    students = models.ManyToManyField(
+        HotdogUser,
+        null=True,
+        blank=True, 
+        related_name='courses'
+    )
     semester = models.IntegerField(blank=True, null=True)
     year = models.IntegerField(blank=True, null=True)
 

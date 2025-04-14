@@ -100,3 +100,38 @@ class TaskView(APIView):
             return Response(status=204)
         except Task.DoesNotExist:
             return Response(status=404)
+        
+
+class TaskHistoryView(generics.ListAPIView):
+    queryset = TaskHistory.objects.all()
+    serializer_class = TaskHistorySerializer
+    permission_classes = [IsAuthenticated]
+
+    def get_queryset(self):
+        return self.queryset.filter(task__id=self.kwargs['task_id'])
+    
+
+class TaskCreateView(generics.CreateAPIView):
+    """
+    API endpoint to create a new task.
+    """
+    serializer_class = TaskSerializer
+    permission_classes = [IsAuthenticated]
+
+    def perform_create(self, serializer):
+        task = serializer.save(created_by=self.request.user, created_at=timezone.now())
+
+
+class TaskListView(APIView):
+    permission_classes = [IsAuthenticated]
+    
+    def get(self, request):
+        user = request.user
+        
+        course_tasks = Task.objects.filter(course__students=user)
+        field_tasks = Task.objects.filter(fields_of_study=user.field_of_study)
+        combined_tasks = course_tasks.union(field_tasks)
+
+        serializer = TaskSerializer(combined_tasks, many=True)
+        
+        return Response(serializer.data)
